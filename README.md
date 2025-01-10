@@ -51,8 +51,8 @@ sequenceDiagram
 
 I am going to use the required technologies in the following ways.
 
-- **HTML** - Description here
-- **CSS** - Description here
+- **HTML** - Foundation of my site
+- **CSS** - Style and design, minimal but clean aesthetic
 - **React** - Description here
 - **Service** - Description here
 - **DB/Login** - Description here
