@@ -18,11 +18,11 @@ This will be a simple implementation of the classic game *Hangman*, with a clean
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-- [ ] Proper use of Markdown
+- [X] Proper use of Markdown
 - [X] A concise and compelling elevator pitch
 - [X] Description of key features
 - [X] Description of how you will use each technology
-- [ ] One or more rough sketches of your application. Images must be embedded in this file using Markdown image references.
+- [X] One or more rough sketches of your application. Images must be embedded in this file using Markdown image references.
 
 ### Elevator pitch
 
@@ -33,12 +33,7 @@ Hangle is a take on the classic word game *Hangman*. It is a classic for a reaso
 ![Design image](mockup.png.png)
 
 
-```mermaid
-sequenceDiagram
-    actor You
-    actor Website
-    You->>Website: Replace this with your design
-```
+
 
 ### Key features
 
