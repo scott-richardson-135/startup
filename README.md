@@ -1,8 +1,8 @@
-# Your startup name here
+# Hangle
 
 [My Notes](notes.md)
 
-A brief description of the application here. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+This will be a simple implementation of the classic game *Hangman*, with a clean, Wordle-type aesthetic. 
 
 
 > [!NOTE]
@@ -26,7 +26,7 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 
 ### Elevator pitch
 
-**FINISH LATER** Wordle type game.
+Hangle is a take on the classic word game *Hangman*. It is a classic for a reason, and Hangle will improve on the experience in several ways. Hangle will implement a large vocabulary and statistics to improve the experience and challenge you to learn more. Hangle is the ultimate test of your language and logic skills. It is a perfect game for people who like puzzles, and there will always be more challenges to test you.
 
 ### Design
 
