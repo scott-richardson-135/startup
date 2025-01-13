@@ -30,7 +30,7 @@ Hangle is a take on the classic word game *Hangman*. It is a classic for a reaso
 
 ### Design
 
-![Design image](placeholder.png)
+![Design image](Screenshot 2025-01-13 135223.png)
 
 
 ```mermaid
