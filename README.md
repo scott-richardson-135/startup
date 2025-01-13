@@ -19,8 +19,8 @@ This will be a simple implementation of the classic game *Hangman*, with a clean
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
 - [ ] Proper use of Markdown
-- [ ] A concise and compelling elevator pitch
-- [ ] Description of key features
+- [X] A concise and compelling elevator pitch
+- [X] Description of key features
 - [X] Description of how you will use each technology
 - [ ] One or more rough sketches of your application. Images must be embedded in this file using Markdown image references.
 
@@ -42,10 +42,13 @@ sequenceDiagram
 
 ### Key features
 
-- Describe your key feature
-- Describe your key feature
-- Describe your key feature
+- Random word generation for unlimited puzzles.
+- Responsive and interactive UI for clean gameplay experience.
+- Login and authentication so users can track statistics.
+- Score sharing for comparison with other users.
+- Keyboard for players to guess individual letters and a text input for guessing the entire word.
 
+  
 ### Technologies
 
 I am going to use the required technologies in the following ways.
