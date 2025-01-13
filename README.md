@@ -21,7 +21,7 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 - [ ] Proper use of Markdown
 - [ ] A concise and compelling elevator pitch
 - [ ] Description of key features
-- [ ] Description of how you will use each technology
+- [X] Description of how you will use each technology
 - [ ] One or more rough sketches of your application. Images must be embedded in this file using Markdown image references.
 
 ### Elevator pitch
@@ -32,7 +32,6 @@ Hangle is a take on the classic word game *Hangman*. It is a classic for a reaso
 
 ![Design image](placeholder.png)
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
 
 ```mermaid
 sequenceDiagram
@@ -51,12 +50,12 @@ sequenceDiagram
 
 I am going to use the required technologies in the following ways.
 
-- **HTML** - Foundation of my site
-- **CSS** - Style and design, minimal but clean aesthetic
-- **React** - Description here
-- **Service** - Description here
-- **DB/Login** - Description here
-- **WebSocket** - Description here
+- **HTML** - Foundation of my site. There will be two HTML pages- login and main game window.
+- **CSS** - Styling my website. I plan to use a clean, simple design that takes inspiration from the popular *Wordle*-type games. 
+- **React** - React will be used to build the dynamic parts of my website, such as making guesses or changing the game state. 
+- **Service** - My website will connect with an API to get random words so that there is greater diversity and randomization in the challenge of the Game. Probably something like [Random Word API](https://random-word-api.herokuapp.com/home).
+- **DB/Login** - Users will be able to register and login and their credentials are stored. They will be able to view their game statistics and history.
+- **WebSocket** - My website will use websocket to notify players when another player completes a puzzle and their score. 
 
 ## 🚀 AWS deliverable
 
