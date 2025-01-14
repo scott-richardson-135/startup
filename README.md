@@ -31,10 +31,11 @@ Hangle is a take on the classic word game *Hangman*. It is a classic for a reaso
 ### Design
 
 
-##Login Page##
+
 ![Design image](login.png)
 
-##Main Page##
+
+
 ![Design image](mockup.png.png)
 
 
