@@ -20,6 +20,52 @@
         <hr />
     </header>
 
+    <main> 
+        <div class="players">
+            <!--display for player name, no functionality yet-->
+            Player:
+            <span class="player-name">Player Name Here</span> 
+        </div>
+
+        <ul class="notification">
+            <!--placeholder for web socket notifications-->
+            <li class="player-name">Player 1 guessed correctly</li>
+            <li class="player-name">Player 2 failed</li>
+        </ul>
+
+        <br />
+
+
+
+
+        <div class="word-container">
+            <!--displays the underlines for the word to be guessed, eventualy guessed letters will replace _-->
+            <div class="word-box" id = "word-display">_ _ _ _ _</div>
+        </div>
+        <br />
+
+        <div class="input-container">
+            <!--little text box to enter a letter to guess-->
+            <label for="guess-input">Guess a letter:</label>
+            <input type="text" id="guess-input" maxlength="1" placeholder="enter a letter">
+            <button id="guess-button">Guess</button>
+        </div>
+
+        <div class="incorrect-guesses">
+            <!--small little box that displays the letters that were guessed and not correct-->
+            <p>Incorrect guesses: <span id="incorrect-letters">placeholder</span></p>
+        </div>
+
+        <div class="remaining-guesses">
+            <!--shows number of guesses remaining, if I wanted to get fancy I could do a hangman type thing-->
+            <p>Guesses remaining: <span id="guesses-left">placeholder</span></p>
+        </div>
+
+
+
+
+    </main>
+
 
 
 
