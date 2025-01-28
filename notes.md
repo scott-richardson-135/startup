@@ -35,4 +35,16 @@ localhost (127.0.0.1)
 
 ## HTML Notes
 
-Nothing yet
+Tags for different sections of the page
+
+Use the most specific tag you can for an element, ID can be added if it is unique and class helps distinguish different types of divisions.
+Most things are formatted like
+
+<img src="source image>
+
+or for tags
+<main></main>
+
+So start with that if you can't figure it out.
+
+
