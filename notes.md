@@ -47,4 +47,24 @@ or for tags
 
 So start with that if you can't figure it out.
 
+## CSS Notes
+
+Responsive design
+- Meta name = "viewport" - One pixel on device matches one pixel on ours
+- float: right - pushes something to the right and wraps everything around it
+- Display - none, block, inline, flex, grid
+- Grid - one of the display types, puts children in a grid, hence the name
+- Flex - all of the children are flexible. On children, you can specify the flex rule. Three values: grow, shrink, basis. Basis is default desired size, if extra space grow tells you how much to grow, and if there is less space, shrink tells how much to shrink. flex: grow, shrink, basis.
+- Block is default display type for divs, inline for spans.
+
+  Holy Grail of layout
+  Classic layout, header with nav on top, footer with information on the bottom, application controls on the left with the content area in the main middle.
+
+  Media Queries
+  Some sort of preposition to describe when to trigger, and it overwrites previous rule
+
+  CSS frameworks
+  A bunch of css references you can include, we are using bootstrap.
+  link to it in header
+
 
