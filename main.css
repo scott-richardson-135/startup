@@ -1,0 +1,33 @@
+/*From my understanding, most of what I'll do in my own stylesheets is responsive design,
+more aesthetic will be using bootstrap*/ 
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-width: 375px;
+    color: black;
+}
+
+header {
+    flex: 0 80px;
+}
+
+main {
+    flex: 1 calc(100vh - 100px); /*sets basis as 100 px smaller than the view height*/
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+}
+
+footer {
+    flex: 0 30px;
+}
+
+.logo {
+    display: block;
+    margin: 10px auto;
+    max-width: 150px;
+    height: auto;
+}
+
