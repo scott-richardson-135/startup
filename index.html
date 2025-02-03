@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hangle</title>
 
+    <!--Include CSS-->
     <link rel="stylesheet" href="main.css">
 
     <!--Bootstrap Stuff-->
@@ -37,22 +38,22 @@
 
     </header>
 
-    <main> 
+    <main class="container-fluid test-center"> 
         <!--Main body of this page, this one is for our login interface placeholder-->
         <h1>Welcome to Hangle</h1>
 
         <img src="logo.png" alt="Hangman Logo" class="logo">
 
         <form method="get" action="play.html">
-            <div>
+            <div class="input-group">
                 <!--email input div-->
-                <span>Email</span>
-                <input type="text" placeholder = "your@email.com">
+                <span class="input-group-text">Email</span>
+                <input class="form-control" type="text" placeholder="your@email.com">
             </div>
-            <div>
+            <div class="input-group">
                 <!--password input div-->
-                <span>Password</span>
-                <input type = "text" placeholder = "password">
+                <span class="input-group-text">Password</span>
+                <input class="form-control" type="text" placeholder="password">
             </div>
 
             <!--Submit buttons, in future they will either login or create account, right now they are the same-->
