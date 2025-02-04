@@ -92,3 +92,44 @@ create a file called index.js if you don't want to do stuff in the browser
 Node.js
 Even better way to do it without the browser
 
+## React Notes
+Web framework does 4 things: Simplify common patterns, provide common components, improve performance, increase device coverage.
+
+JSX: Combining Javascript and HTML
+
+JSX -> const jsx = <p>Hello World</p>;
+JS -> const jsx = React.createElement("p", null, "Hello world");
+
+Does cool injecting stuff to put that element there.
+JSX translates it automatically from the first one to put an html element onto the DOM using Babel
+
+
+Components- header, main, footer
+
+Component:
+const Hello = () => {
+  return <div>Hello React</div>;
+}
+
+Children:
+
+function Header() {
+  return {
+    <nav className="app-bar">
+      <Link label="home"/>
+      <Link label="users"/>
+      <Link label="about"/>
+    </nav>
+  };
+}
+
+Router:
+Our application has a lot of duplicated HTML, not componentized
+We want to convert to a single page application, or SPA. Componentized DOM injection for our content page. Uses <BrowserRouter>
+
+Toolchain:
+How do I compile JSX myself? 
+Vite- Frontend Build tool
+
+
+
