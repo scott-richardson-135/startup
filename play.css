@@ -1,0 +1,5 @@
+.notification {
+    font-size: 0.875rem; /* Smaller text */
+    padding: 0.5rem; /* Less padding */
+    margin: 0.5rem 0; /* Reduce margin */
+}

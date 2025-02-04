@@ -4,6 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hangle</title>
+    
+    <!--Include CSS-->
+    <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="play.css">
 
     <!--Bootstrap Stuff-->
     <link
@@ -33,17 +37,17 @@
 
     </header>
 
-    <main> 
-        <div class="players">
+    <main class="container-fluid text-center">
+        <img src="logo.png" alt="Hangman Logo" class="logo"> 
+        <div class="players mt-4">
             <!--display for player name, no functionality yet-->
-            Player:
-            <span class="player-name">Player Name Here</span> 
+            <h3>Player: <span class="player-name fw-bold">Player Name Here</span></h3>
         </div>
 
-        <ul class="notification">
+        <ul class="notification list-group my-3">
             <!--placeholder for web socket notifications-->
-            <li class="player-name">Player 1 guessed correctly</li>
-            <li class="player-name">Player 2 failed</li>
+            <li class="list-group-item">Player 1 guessed correctly</li>
+            <li class="list-group-item">Player 2 failed</li>
         </ul>
 
         <br />
@@ -51,28 +55,32 @@
 
 
 
-        <div class="word-container">
+        <div class="word-container mt-4">
             <!--displays the underlines for the word to be guessed, eventualy guessed letters will replace _-->
             <!--api call will be around here to get a random word to guess-->
-            <div class="word-box" id = "word-display">_ _ _ _ _</div>
+            <h2>Word to Guess</h2>
+            <div class="word-box border p-3" id="word-display">_ _ _ _ _</div>
         </div>
         <br />
 
-        <div class="input-container">
+
+        <div class="input-container my-3">
             <!--little text box to enter a letter to guess-->
-            <label for="guess-input">Guess a letter:</label>
-            <input type="text" id="guess-input" maxlength="1" placeholder="enter a letter">
-            <button id="guess-button">Guess</button>
+            <label for="guess-input" class="form-label">Guess a letter:</label>
+            <div class="input-group w-50 mx-auto"> 
+                <input type="text" class="form-control text-center" id="guess-input" maxlength="1">
+                <button id="guess-button" class="btn btn-success">Guess</button>
+            </div>
         </div>
 
         <div class="incorrect-guesses">
             <!--small little box that displays the letters that were guessed and not correct-->
-            <p>Incorrect guesses: <span id="incorrect-letters">placeholder</span></p>
+            <p class="fw-bold">Incorrect guesses: <span id="incorrect-letters" class="text-danger">placeholder</span></p>
         </div>
 
         <div class="remaining-guesses">
             <!--shows number of guesses remaining, if I wanted to get fancy I could do a hangman type thing-->
-            <p>Guesses remaining: <span id="guesses-left">placeholder</span></p>
+            <p class="fw-bold">Guesses remaining: <span id="guesses-left" class="text-primary">placeholder</span></p>
         </div>
 
 
