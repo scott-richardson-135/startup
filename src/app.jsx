@@ -1,17 +1,30 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './app.css';
+import { BrowserRouter, NavLink, Route, Routes } from 'react-router-dom';
+import { Login } from './login/login';
+import { Play } from './play/play';
+import { Stats } from './stats/stats';
+
 
 export default function App() {
-  return (<div className='body bg-white'>
+  return (
+    <BrowserRouter>
+    <div className='body bg-white'>
     <header className="container-fluid">
         {/* Header stuff */}
         <nav className="navbar fixed-top">
             <h1>Hangle</h1>
             <menu className="navbar nav"> 
-                <li className="nav-item"><a className="nav-link active" href="index.html">Login</a></li>
-                <li className="nav-item"><a className="nav-link active" href="play.html">Play</a></li>
-                <li className="nav-item"><a className="nav-link active" href="stats.html">Statistics</a></li>
+            <li className="nav-item">
+                <NavLink className="nav-link active" to="/">Login</NavLink>
+            </li>
+            <li className="nav-item">
+                <NavLink className="nav-link active" to="play">Play</NavLink>
+            </li>
+            <li className="nav-item">
+                <NavLink className="nav-link active" to="stats">Statistics</NavLink>
+            </li>
             </menu>
         </nav>
     </header>
@@ -24,5 +37,7 @@ export default function App() {
             <a class="text-reset" href="https://github.com/scott-richardson-135/startup">GitHub</a>
         </div>
     </footer>
-  </div>);
+  </div>
+  </BrowserRouter>
+  );
 }
