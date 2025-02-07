@@ -1,7 +1,7 @@
 /*From my understanding, most of what I'll do in my own stylesheets is responsive design,
 more aesthetic will be using bootstrap*/ 
 
-body {
+.body {
     display: flex;
     flex-direction: column;
     min-width: 375px;
