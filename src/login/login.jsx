@@ -1,6 +1,18 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
 export function Login() {
+    const navigate = useNavigate();
+    
+    const handleLoginClick = () => {
+        navigate('/play');
+      };
+    
+      const handleCreateClick = () => {
+        navigate('/play');  // Redirect to the same page for now
+      };
+
+
   return (
     <main className='container-fluid bg-white text-center'>
       <h1>Welcome to Hangle</h1>
@@ -18,8 +30,8 @@ export function Login() {
         </div>
 
 
-        <button type = "submit" className="btn btn-success">Login</button>
-        <button type = "submit" className="btn btn-secondary">Create</button>  
+        <button type = "button" onClick={handleLoginClick} className="btn btn-success">Login</button>
+        <button type = "button" onClick={handleCreateClick} className="btn btn-secondary">Create</button>  
 
 
 
