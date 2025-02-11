@@ -132,4 +132,97 @@ How do I compile JSX myself?
 Vite- Frontend Build tool
 
 
+## More JS stuff
+Run Js files with node. node index.js
+
+Console.log flavors
+
+C style - console.log('hello %s', 'world');
+console.count('a') (increments the number of times a has been called)
+helps to debug things that don't really work with a debugger
+
+Functions are just another type
+
+const add = function (a, b = 0) {
+  return a + b;
+};
+
+function doMath(operation, a, b) {
+  return operation(a, b);
+}
+doMath takes in a function as a parameter and does the operation to the other parameters
+
+console.log(doMath(function (a, b) { return a - b; }, 5, 3));
+(this creates an *anonymous function*)
+
+console.log(doMath((a, b) => a - b, 5, 3));
+(the arrow syntax makes this look cleaner, does the exact same thing)
+
+More about arrow functions
+() => 3;
+() => { 3; }; <- This returns undefined because of the new line, need to inlcude a return statement
+() => { return 3; };
+
+Closures
+Clousures let me create a function that not only passes in a parameter, but also the state of everything passed in
+
+function makeClosure(init) {
+  let closureValue = init;
+  return () => `closure ${++closureValue}`;
+}
+
+const closure = makeClosure(0);
+console.log(closure()); <- prints out one
+console.log(closure()); <- this is where it gets interesting, it will increment again to 2 because it is a closure and saves the states
+
+Setting up the most basic react application of all time
+mkdir reactDemo && cd reactDemo
+npm init -y
+npm install vite@latest -D
+npm install react react-dom
+
+index.html
+<html lang="en">
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/index.jsx"></script>
+  </body>
+</html>
+
+
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+
+function App() {
+  return <div>Hello React</div>;
+}
+
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(<App />);
+
+Arrow functions in react
+function App() {
+  const [count, setCount] = React.useState(0);
+
+  return (
+    <div>
+      <h1>Count: {count}</h1>
+      <button onClick={() => setCount(count + 1)}>n++</button>
+      <button onClick={() => setCount(count - 1)}>n--</button>
+    </div>
+  );
+}
+Helpful for buttons like this
+
+ Reactivity in react, have to change it, it doesn't update automatically. React.useState();
+
+ JSON
+ Json is a way to represent data, has string, number, boolean, array, object, null. Converts from an object format in js to a textual representation in json.
+ const obj;
+ const json = JSON.stringify(obj);
+ const objFromJson = JSON.parse(json);
+
+ 
+
+ 
 
