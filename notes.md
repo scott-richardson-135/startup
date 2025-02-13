@@ -1,6 +1,6 @@
 # CS 260 Notes
 
-[My startup](https://simon.cs260.click)
+[My startup](https://startup.srich260.click)
 
 ## Helpful links
 
@@ -221,6 +221,31 @@ Helpful for buttons like this
  const obj;
  const json = JSON.stringify(obj);
  const objFromJson = JSON.parse(json);
+
+
+ ## More React
+
+ Ways to tell React to rerender
+ -Properties to components
+ -State on components
+
+Periodically react rerenders any components with a changed state
+
+Using state:
+const [quote, setQuote] = React.useState({test:'...loading', author:'Person'});
+const [image, setImage] = React.useState(null)  <- do a similar thing with this one
+
+React.useEffect(() => {
+  setQuote({text: 'Very inspiring words", author: 'Me'});
+  setImage('placeholder.jpg');
+} []);
+
+<p class="quote">(quote.text)</p>
+<p class="quote">(quote.author)</p>
+
+This makes it render once when the variables change
+
+
 
  
 
