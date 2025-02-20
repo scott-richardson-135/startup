@@ -245,9 +245,61 @@ React.useEffect(() => {
 
 This makes it render once when the variables change
 
+## Promises
+
+Advanced JS topic so don't cry about it yet
+
+Browser rendering is *single threaded*
+
+I promise when I get the milk I will call you back
+
+
+States:
+-pending: currently running asynchronously
+-fulfilled: completed successfully
+-rejected: failed to complete
+
+
+
+function callback(resolve) {  (state callback)
+  resolve('done');  (fulfilled)
+}
+
+const p = new Promise(callback);  (promise callback)
+
+p.then((result) => console.log(result));  (when callback resolves, call this)
+
+Resolve changes the state of the promise. Create a new promise object.
+Then function says that when the promise is resolved, call the next function (log for us).
+
+Promise syntax
+coinToss
+  .then((result) => console.log(`Toss result: ${result}`))
+  .catch((err) => console.error(`Error: ${err}`))
+ .finally(() => console.log('Toss completed'));
+
+
+ Await syntax
+ try {
+  const result = await coinToss;
+  console.log(`Toss result ${result}`);
+} catch (err) {
+  console.error(`Error: ${err}`);
+} finally {
+  console.log(`Toss completed`);
+}
+
+Careful with await, there is nothing special about it, it just hides the 'then' block
+Some weird implications of this
+functions need to be async to be used with await, but async functions return promises even if you don't expect it.
+
+Rule for using await
+
+top level module function
+        or
+called from an async function
+
+
 
 
  
-
- 
-
