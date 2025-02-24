@@ -11,6 +11,7 @@ export function Play() {
     const [incorrectGuesses, setIncorrectGuesses] = useState([]);
     const [remainingGuesses, setRemainingGuesses] = useState(6);
     const [notifications, setNotifications] = useState([]);
+    const [guess, setGuess] = useState("");
 
     //Get word, will be an api call eventually
     useEffect(() => {
@@ -36,6 +37,8 @@ export function Play() {
             setIncorrectGuesses((prev) => [...prev, letter]);
             setRemainingGuesses(remainingGuesses - 1);
         }
+
+        setGuess("");
     }
 
   return (
@@ -74,10 +77,12 @@ export function Play() {
                 <input type="text"
                 className="form-control text-center"
                 id="guess-input" maxlength="1"
-                onKeyDown={(e) => e.key === "Enter" && handleGuess(e.target.value)} 
+                value = {guess}
+                onChange={(e) => setGuess(e.target.value)}
+                onKeyDown={(e) => e.key === "Enter" && handleGuess(guess)} 
                 />
                 <button id="guess-button" className="btn btn-success"
-                onClick={() => handleGuess(document.querySelector("#guess-input").value)}
+                onClick={() => handleGuess(guess)}
                 >Guess</button>
             </div>
         </div>
