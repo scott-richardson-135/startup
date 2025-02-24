@@ -56,7 +56,7 @@ export function Play() {
 
 
 
-
+        {/*Word Display*/}
         <div className="word-container mt-4">
             {/* <!--displays the underlines for the word to be guessed, eventualy guessed letters will replace _-->
             <!--api call will be around here to get a random word to guess--> */}
@@ -66,6 +66,7 @@ export function Play() {
         <br />
 
 
+        {/*Guess input*/}
         <div className="input-container my-3">
             {/* <!--little text box to enter a letter to guess--> */}
             <label for="guess-input" className="form-label">Guess a letter:</label>
@@ -75,14 +76,16 @@ export function Play() {
             </div>
         </div>
 
+
+
         <div className="incorrect-guesses">
             {/* <!--small little box that displays the letters that were guessed and not correct--> */}
-            <p className="fw-bold">Incorrect guesses: <span id="incorrect-letters" className="text-danger">placeholder</span></p>
+            <p className="fw-bold">Incorrect guesses: <span id="incorrect-letters" className="text-danger">{incorrectGuesses.join(",") || "None"}</span></p>
         </div>
 
         <div className="remaining-guesses">
             {/* <!--shows number of guesses remaining, if I wanted to get fancy I could do a hangman type thing--> */}
-            <p className="fw-bold">Guesses remaining: <span id="guesses-left" className="text-primary">placeholder</span></p>
+            <p className="fw-bold">Guesses remaining: <span id="guesses-left" className="text-primary">{remainingGuesses}</span></p>
         </div>
     </main>
   );
