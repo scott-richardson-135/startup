@@ -19,6 +19,25 @@ export function Play() {
         setDisplayWord("_ ".repeat(randomWord.length).trim())
     }, [])
 
+    //logic for guessed letter
+    const handleGuess = (letter) => {
+        letter = letter.toUpperCase();
+
+        if (!letter.match(/[A-Z]/) || guessedLetters.includes(letter)) return;
+
+        setGuessedLetters((prev) => [...prev, letter]); //adds letter to guessed letters while managing state
+
+        if (word.includes(letter)) {
+            //update the display word
+            let updatedDisplayWord = word.split("").map((char) => (guessedLetters.includes(char) || char === letter ? char : "_")).join(" ");
+            setDisplayWord(updatedDisplayWord);
+        }
+        else {
+            setIncorrectGuesses((prev) => [...prev, letter]);
+            setRemainingGuesses(remainingGuesses - 1);
+        }
+    }
+
   return (
     <main className='container-fluid bg-white text-center'>
     <img src="logo.png" alt="Hangman Logo" className="logo"/> 
