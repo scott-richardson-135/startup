@@ -2,6 +2,21 @@ import React from 'react';
 import './play.css';
 
 export function Play() {
+
+    //state variables
+    const [word, setWord] = useState("");
+    const [displayWord, setDisplayWOrd] = useState("");
+    
+
+
+
+
+
+
+
+
+
+
   return (
     <main className='container-fluid bg-white text-center'>
     <img src="logo.png" alt="Hangman Logo" className="logo"/> 
