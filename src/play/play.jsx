@@ -71,8 +71,14 @@ export function Play() {
             {/* <!--little text box to enter a letter to guess--> */}
             <label for="guess-input" className="form-label">Guess a letter:</label>
             <div className="input-group w-50 mx-auto"> 
-                <input type="text" className="form-control text-center" id="guess-input" maxlength="1"/>
-                <button id="guess-button" className="btn btn-success">Guess</button>
+                <input type="text"
+                className="form-control text-center"
+                id="guess-input" maxlength="1"
+                onKeyDown={(e) => e.key === "Enter" && handleGuess(e.target.value)} 
+                />
+                <button id="guess-button" className="btn btn-success"
+                onClick={() => handleGuess(document.querySelector("#guess-input").value)}
+                >Guess</button>
             </div>
         </div>
 
@@ -80,7 +86,7 @@ export function Play() {
 
         <div className="incorrect-guesses">
             {/* <!--small little box that displays the letters that were guessed and not correct--> */}
-            <p className="fw-bold">Incorrect guesses: <span id="incorrect-letters" className="text-danger">{incorrectGuesses.join(",") || "None"}</span></p>
+            <p className="fw-bold">Incorrect guesses: <span id="incorrect-letters" className="text-danger">{incorrectGuesses.join(", ") || "None"}</span></p>
         </div>
 
         <div className="remaining-guesses">
