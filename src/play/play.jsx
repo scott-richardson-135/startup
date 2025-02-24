@@ -1,21 +1,23 @@
 import React from 'react';
+import { useState, useEffect } from 'react';
 import './play.css';
 
 export function Play() {
 
     //state variables
     const [word, setWord] = useState("");
-    const [displayWord, setDisplayWOrd] = useState("");
-    
+    const [displayWord, setDisplayWord] = useState("");
+    const [guessedLetters, setGuessedLetters] = useState([]);
+    const [incorrectGuesses, setIncorrectGuesses] = useState([]);
+    const [remainingGuesses, setRemainingGuesses] = useState(6);
+    const [notifications, setNotifications] = useState([]);
 
-
-
-
-
-
-
-
-
+    //Get word, will be an api call eventually
+    useEffect(() => {
+        const randomWord = "PLACEHOLDER"; //this is where the API call needs to put the word
+        setWord(randomWord);
+        setDisplayWord("_ ".repeat(randomWord.length).trim())
+    }, [])
 
   return (
     <main className='container-fluid bg-white text-center'>
@@ -40,7 +42,7 @@ export function Play() {
             {/* <!--displays the underlines for the word to be guessed, eventualy guessed letters will replace _-->
             <!--api call will be around here to get a random word to guess--> */}
             <h2>Word to Guess</h2>
-            <div className="word-box border p-3" id="word-display">_ _ _ _ _</div>
+            <div className="word-box border p-3" id="word-display">{displayWord}</div>
         </div>
         <br />
 
