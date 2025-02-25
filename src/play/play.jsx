@@ -80,10 +80,10 @@ export function Play() {
         //update stats here, local storage for now
         const stats = JSON.parse(localStorage.getItem("hangleStats")) || {wins: 0, losses: 0, gamesPlayed: 0}
         stats.gamesPlayed += 1;
-        if (gameResult === "win") {
+        if (result === "win") {
             stats.wins += 1;
         }
-        if (gamesPlayed === "loss") {
+        if (result === "loss") {
             stats.losses += 1;
         }
         localStorage.setItem("hangleStats", JSON.stringify(stats));
