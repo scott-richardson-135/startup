@@ -299,6 +299,78 @@ top level module function
         or
 called from an async function
 
+## Service Requests
+
+We're going backend baby
+Making service requests
+Going to your domain name makes a service request to get index.html with https
+Using javascript you can call other services
+
+
+Make service requests with curl
+Can also change our server to serve up endpoints, not just static files
+
+Your service can call other services, maybe getting a user needs a request to a database
+
+Everything is a resource (image, video, html file, binary stuff, etc.)
+
+Uniform Resource Locator (URL)
+
+https://byu.edu:433/api/city?q=pro#3
+
+https:// - Scheme
+byu.edu - Domain
+:433 - port
+/api/city - path
+?q=pro - parameters
+#3 - anchor
+
+What is a port?
+Hostname gets you to the building, port is the room in the building
+My server has 2 programs running, simon and startup. They are listening on 3000 and 4000
+We use standard port 443, secure http protocol port. Caddy has a map to the different services by the subdomain, so we can access both from one port
+SSH daemon is also listening on port 22
+
+Hypertext transfer protocol (HTTP)
+Request, always comes from the client
+Response, comes from server
+
+POST /user HTTP/1.1  - Method, path, version
+A bunch of parameters, or headers, that are key value pairs
+Eg. Host: cs260.click, User-Agent: curl1/7.77.0 etc
+
+HTTP Methods
+Get: get a resource
+Post: create a resource
+Put: update a resource
+Delete: delete a resource
+
+Response
+HTTP/1.1 200 OK  - Version, status
+Content-Type: application/json
+Content-Length: 15
+Content-Encoding: gzip
+
+{"id":"12", "name":"tim"} (this would normally be compressed)
+
+Status codes
+-2xx: 200 success, 204 no content
+-3xx: 301/302 redirect, 304 not modified
+-4xx: 400 bad request, 404 not found, 403 forbidden, 429 too many requests
+-5xx: 500 server error, 503 not avaliable
+
+Content types
+MIME types
+-text/html
+-application/json
+-image/jpg
+-video/mp4
+
+Fetch
+**fetch(url).then(r => r.json()).then(j => console.log(j.value))**
+uses promises to fetch the data, convert from json to javascript object, then print object
+Super important for my api call, maybe just this one line
+
 
 
 
