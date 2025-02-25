@@ -20,6 +20,24 @@ export function Play() {
         setDisplayWord("_ ".repeat(randomWord.length).trim())
     }, [])
 
+    //Mock Notifications
+    useEffect(()=> {
+        const messages = [
+            "Player 1 Lost",
+            "Player 2 Won",
+            "Player 2 started a game",
+            "Player 3 said hi"
+        ];
+
+
+        const interval = setInterval(() => {
+            const randomMessage = messages[Math.floor(Math.random() * messages.length)];
+            setNotifications((prev) => [...prev.slice(-2), randomMessage])
+        }, 5000)
+
+        return () => clearInterval(interval);
+    }, [])
+
     //logic for guessed letter
     const handleGuess = (letter) => {
         letter = letter.toUpperCase();
@@ -49,10 +67,16 @@ export function Play() {
             <h3>Player: <span className="player-name fw-bold">Player Name Here</span></h3>
         </div>
 
+
+        {/*Notifications*/}
         <ul className="notification list-group my-3">
-            {/* <!--placeholder for web socket notifications--> */}
-            <li className="list-group-item">Player 1 guessed correctly</li>
-            <li className="list-group-item">Player 2 failed</li>
+            {notifications.length > 0 ? (
+                notifications.map((note, index) => (
+                    <li key={index} className="list-group-item">{note}</li>
+                 ))
+            ) : (
+                <li className="list-group-item text-muted">No new notifications</li>
+            )}
         </ul>
 
         <br />
@@ -61,8 +85,6 @@ export function Play() {
 
         {/*Word Display*/}
         <div className="word-container mt-4">
-            {/* <!--displays the underlines for the word to be guessed, eventualy guessed letters will replace _-->
-            <!--api call will be around here to get a random word to guess--> */}
             <h2>Word to Guess</h2>
             <div className="word-box border p-3" id="word-display">{displayWord}</div>
         </div>
