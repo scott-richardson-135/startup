@@ -12,6 +12,9 @@ export function Play() {
     const [remainingGuesses, setRemainingGuesses] = useState(6);
     const [notifications, setNotifications] = useState([]);
     const [guess, setGuess] = useState("");
+    const [gameOver, setGameOver] = useState(false);
+    const [gameResult, setGameResult] = useState(null);
+
 
     //Get word, will be an api call eventually
     useEffect(() => {
@@ -50,6 +53,11 @@ export function Play() {
             //update the display word
             let updatedDisplayWord = word.split("").map((char) => (guessedLetters.includes(char) || char === letter ? char : "_")).join(" ");
             setDisplayWord(updatedDisplayWord);
+
+            //endgame check
+            if (updatedDisplayWord.replace(/ /g, "") === word) {
+                endGame("win");
+            } 
         }
         else {
             setIncorrectGuesses((prev) => [...prev, letter]);
@@ -57,6 +65,13 @@ export function Play() {
         }
 
         setGuess("");
+    }
+
+    const endGame = (result) => {
+        setGameOver(true);
+        setGameResult(result);
+
+        //update stats here, local storage for now
     }
 
   return (
@@ -92,22 +107,31 @@ export function Play() {
 
 
         {/*Guess input*/}
-        <div className="input-container my-3">
+        {!gameOver ? (
+            <div className="input-container my-3">
             {/* <!--little text box to enter a letter to guess--> */}
             <label for="guess-input" className="form-label">Guess a letter:</label>
-            <div className="input-group w-50 mx-auto"> 
-                <input type="text"
-                className="form-control text-center"
-                id="guess-input" maxlength="1"
-                value = {guess}
-                onChange={(e) => setGuess(e.target.value)}
-                onKeyDown={(e) => e.key === "Enter" && handleGuess(guess)} 
-                />
-                <button id="guess-button" className="btn btn-success"
-                onClick={() => handleGuess(guess)}
-                >Guess</button>
+                <div className="input-group w-50 mx-auto"> 
+                    <input type="text"
+                    className="form-control text-center"
+                    id="guess-input" maxlength="1"
+                    value = {guess}
+                    onChange={(e) => setGuess(e.target.value)}
+                    onKeyDown={(e) => e.key === "Enter" && handleGuess(guess)} 
+                    />
+                    <button id="guess-button" className="btn btn-success"
+                    onClick={() => handleGuess(guess)}
+                    >Guess</button>
+                </div>
             </div>
-        </div>
+        ) : (
+            <div className="game-over-container">
+                <h2 className={gameResult === "win" ? "text-success" : "text-danger"}>
+                    {gameResult === "win" ? "You Win!" : "You Lose"}
+                </h2>
+            </div>
+        )}
+        
 
 
 
