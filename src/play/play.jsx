@@ -80,6 +80,18 @@ export function Play() {
         //update stats here, local storage for now
     }
 
+    const resetGame = () => {
+        setGuessedLetters([]);
+        setIncorrectGuesses([]);
+        setRemainingGuesses(6);
+        setGameOver(false);
+        setGameResult(null);
+
+        const randomWord = "DIFFERENT"; //another api call here
+        setWord(randomWord);
+        setDisplayWord("_ ".repeat(randomWord.length).trim());
+    };
+
   return (
     <main className='container-fluid bg-white text-center'>
     <img src="logo.png" alt="Hangman Logo" className="logo"/> 
@@ -135,6 +147,7 @@ export function Play() {
                 <h2 className={gameResult === "win" ? "text-success" : "text-danger"}>
                     {gameResult === "win" ? "You Win!" : "You Lose"}
                 </h2>
+                <button className={`btn ${gameResult === "win" ? "btn-success" : "btn-danger"}`} onClick={resetGame}>Reset</button>
             </div>
         )}
         
