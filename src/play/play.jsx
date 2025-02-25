@@ -67,6 +67,12 @@ export function Play() {
         setGuess("");
     }
 
+    useEffect(() => {
+        if (remainingGuesses === 0) {
+            endGame("loss");
+        }
+    }, [remainingGuesses]);
+
     const endGame = (result) => {
         setGameOver(true);
         setGameResult(result);
