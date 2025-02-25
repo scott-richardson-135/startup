@@ -78,6 +78,15 @@ export function Play() {
         setGameResult(result);
 
         //update stats here, local storage for now
+        const stats = JSON.parse(localStorage.getItem("hangleStats")) || {wins: 0, losses: 0, gamesPlayed: 0}
+        stats.gamesPlayed += 1;
+        if (gameResult === "win") {
+            stats.wins += 1;
+        }
+        if (gamesPlayed === "loss") {
+            stats.losses += 1;
+        }
+        localStorage.setItem("hangleStats", JSON.stringify(stats));
     }
 
     const resetGame = () => {
@@ -161,7 +170,7 @@ export function Play() {
 
         <div className="remaining-guesses">
             {/* <!--shows number of guesses remaining, if I wanted to get fancy I could do a hangman type thing--> */}
-            <p className="fw-bold">Guesses remaining: <span id="guesses-left" className="text-primary">{remainingGuesses}</span></p>
+            <p className="fw-bold">Incorrect guesses remaining: <span id="guesses-left" className="text-primary">{remainingGuesses}</span></p>
         </div>
     </main>
   );
