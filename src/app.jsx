@@ -1,23 +1,24 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './app.css';
-import { BrowserRouter, NavLink, Route, Routes } from 'react-router-dom';
+import { BrowserRouter, NavLink, Route, Routes, useLocation } from 'react-router-dom';
 import { Login } from './login/login';
 import { Play } from './play/play';
 import { Stats } from './stats/stats';
 
 
-export default function App() {
+function AppContent() {
+    const location = useLocation();
   return (
-    <BrowserRouter>
     <div className='body bg-white'>
     <header className="container-fluid">
         {/* Header stuff */}
-        <nav className="navbar fixed-top">
+        {location.pathname !== '/' && (
+            <nav className="navbar fixed-top">
             <h1>Hangle</h1>
             <menu className="navbar nav"> 
             <li className="nav-item">
-                <NavLink className="nav-link active" to="/">Login</NavLink>
+                <NavLink className="nav-link active" to="/">Log Out</NavLink>
             </li>
             <li className="nav-item">
                 <NavLink className="nav-link active" to="play">Play</NavLink>
@@ -26,7 +27,7 @@ export default function App() {
                 <NavLink className="nav-link active" to="stats">Statistics</NavLink>
             </li>
             </menu>
-        </nav>
+        </nav>)}
     </header>
 
 
@@ -44,8 +45,15 @@ export default function App() {
         </div>
     </footer>
   </div>
-  </BrowserRouter>
   );
+}
+
+export default function App() {
+    return (
+        <BrowserRouter>
+            <AppContent />
+        </BrowserRouter>
+    );
 }
 
 function NotFound() {
