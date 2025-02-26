@@ -25,7 +25,7 @@ export function Stats() {
         </div>
 
         <div className="stat">
-            <p>Win percentage: <span id="winpct">%{(wins / gamesPlayed) * 100}</span></p>
+            <p>Win percentage: <span id="winpct">{(wins / gamesPlayed) * 100}%</span></p>
         </div>
     </main>
   );
