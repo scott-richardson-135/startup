@@ -14,6 +14,8 @@ export function Play() {
     const [guess, setGuess] = useState("");
     const [gameOver, setGameOver] = useState(false);
     const [gameResult, setGameResult] = useState(null);
+    const userName = localStorage.getItem('hangleCurrentUser');
+     
 
 
     //Get word, will be an api call eventually
@@ -78,15 +80,20 @@ export function Play() {
         setGameResult(result);
 
         //update stats here, local storage for now
-        const stats = JSON.parse(localStorage.getItem("hangleStats")) || {wins: 0, losses: 0, gamesPlayed: 0}
-        stats.gamesPlayed += 1;
-        if (result === "win") {
-            stats.wins += 1;
+        const users = JSON.parse(localStorage.getItem("hangleUsers")) || {};
+        const currentUser = localStorage.getItem("hangleCurrentUser");
+
+        if (currentUser && users[currentUser]) {
+            users[currentUser].stats.gamesPlayed += 1;
+            if (result === "win") {
+                users[currentUser].stats.wins +=1;
+            }
+            else {
+                users[currentUser].stats.losses +=1;
+            }
         }
-        if (result === "loss") {
-            stats.losses += 1;
-        }
-        localStorage.setItem("hangleStats", JSON.stringify(stats));
+
+        localStorage.setItem("hangleUsers", JSON.stringify(users));
     }
 
     const resetGame = () => {
@@ -106,7 +113,7 @@ export function Play() {
     <img src="logo.png" alt="Hangman Logo" className="logo"/> 
         <div className="players mt-4">
             {/* <!--display for player name, no functionality yet--> */}
-            <h3>Player: <span className="player-name fw-bold">Player Name Here</span></h3>
+            <h3>Good luck, <span className="player-name fw-bold">{userName}</span></h3>
         </div>
 
 

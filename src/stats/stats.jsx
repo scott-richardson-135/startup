@@ -2,10 +2,11 @@ import React from 'react';
 import './stats.css';
 
 export function Stats() {
-    const stats = JSON.parse(localStorage.getItem("hangleStats")) || { wins: 0, losses: 0, gamesPlayed: 0 };
-    const gamesPlayed = stats.gamesPlayed;
-    const wins = stats.wins;
-    const losses = stats.losses;
+    const users = JSON.parse(localStorage.getItem("hangleUsers")) || {};
+    const currentUser = localStorage.getItem("hangleCurrentUser");
+    const gamesPlayed = users[currentUser].stats.gamesPlayed;
+    const wins = users[currentUser].stats.wins;
+    const losses = users[currentUser].stats.losses;
 
   return (
     <main className='container-fluid bg-white text-center'>

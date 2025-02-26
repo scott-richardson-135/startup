@@ -11,9 +11,11 @@ export function Login() {
     const handleLoginClick = () => {
       const users = JSON.parse(localStorage.getItem('hangleUsers')) || {};
       
-      if (users[email] && users[email].password === password)
+      if (users[email] && users[email].password === password) {
         localStorage.setItem('hangleCurrentUser', email); 
         navigate('/play');
+      }
+        
       };
     
       const handleCreateClick = () => {
