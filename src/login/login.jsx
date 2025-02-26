@@ -1,15 +1,40 @@
 import React from 'react';
+import {useState} from 'react';
 import { useNavigate } from 'react-router-dom';
 
 export function Login() {
     const navigate = useNavigate();
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+
     
     const handleLoginClick = () => {
+      const users = JSON.parse(localStorage.getItem('hangleUsers')) || {};
+      
+      if (users[email] && users[email].password === password)
+        localStorage.setItem('hangleCurrentUser', email); 
         navigate('/play');
       };
     
       const handleCreateClick = () => {
-        navigate('/play');  // Redirect to the same page for now
+        if (!email || !password) {
+          return;
+        }
+
+        const users = JSON.parse(localStorage.getItem('hangleUsers')) || {};
+        if (users[email]) {
+          return;
+        }
+
+        users[email] = {
+          password,
+          stats: {wins: 0, losses: 0, gamesPlayed: 0}
+
+        };
+
+        localStorage.setItem('hangleUsers', JSON.stringify(users));
+        localStorage.setItem('hangleCurrentUser', email);
+        navigate('/play');
       };
 
 
@@ -19,14 +44,14 @@ export function Login() {
 
     <img src="logo.png" alt="Hangman Logo" className="logo" />
 
-    <form method="get" action="play.html">
+    <form onSubmit={(e) => e.preventDefault()}>
         <div className="input-group">
             <span className="input-group-text">Email</span>
-            <input className="form-control" type="text" placeholder="your@email.com" />
+            <input className="form-control" type="text" placeholder="your@email.com" value={email} onChange={(e) => setEmail(e.target.value)}/>
         </div>
         <div className="input-group">
             <span className="input-group-text">Password</span>
-            <input className="form-control" type="text" placeholder="password" />
+            <input className="form-control" type="text" placeholder="password" value={password} onChange={(e) => setPassword(e.target.value)}/>
         </div>
 
 
