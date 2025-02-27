@@ -1,3 +1,4 @@
+
 # CS 260 Notes
 
 [My startup](https://startup.srich260.click)
@@ -371,7 +372,28 @@ Fetch
 uses promises to fetch the data, convert from json to javascript object, then print object
 Super important for my api call, maybe just this one line
 
+## Express
 
+Express - constructior and default connectivity
+app - service application
+req - request object
+res - response object
 
+app.listen(port) for listening
+
+.send
+Sends the rightkind of data. If it sees a js object it will return json etc.
+
+.redirect(301, "https://srich260.click")
+
+Middleware
+Generic application that runs smaller chunks
+each of our responses were middleware
+
+**Look at the no bobs for authentication stuff** 
+
+parsing json request
+app.use(express.json());
+automatically converts the response to a js object
 
  
