@@ -203,7 +203,7 @@ root.render(<App />);
 
 Arrow functions in react
 function App() {
-  const [count, setCount] = React.useState(0);
+  const count, setCount = React.useState(0);
 
   return (
     <div>
@@ -395,5 +395,32 @@ each of our responses were middleware
 parsing json request
 app.use(express.json());
 automatically converts the response to a js object
+
+## Authentication vs authorization
+
+Custom authentication
+-Store credentials
+-Veryify Credentials
+-restrict access
+
+Securely storing passwords - Bcrypt
+Salt, hash, and compare
+npm install bcryptjs
+
+Authorization tokens
+npm install uuid
+Universal Unique Identifier
+
+const token = uuid.v4()
+
+Pass the tokens around using cookies
+Set-Cookie: token=x83yzi; Secure; HttpOnly; SameSite=Strict
+Secure- HTTPS only
+HttpOnly- !JavaScript
+SameSite = Strict- only given back to origin
+npm install express cookie-parser uuid
+
+
+
 
  
