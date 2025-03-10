@@ -104,8 +104,8 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-- [X] **All functionality implemented or mocked out** - Everything is mocked out
-- [X] **Hooks** - I used the hooks
+- [X] **All functionality implemented or mocked out** - Everything is mocked out, including a placeholder word before an api request, storing users for login and statistics for each user, and all functionality for the main game.
+- [X] **Hooks** - Use effect and use state implemented in various areas in my code to work with React and keep everything up to date.
 
 ## 🚀 Service deliverable
 
