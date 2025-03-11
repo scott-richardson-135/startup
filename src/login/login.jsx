@@ -18,26 +18,56 @@ export function Login() {
         
       };
     
-      const handleCreateClick = () => {
+      const handleCreateClick = async () => {
         if (!email || !password) {
           return;
         }
 
-        const users = JSON.parse(localStorage.getItem('hangleUsers')) || {};
-        if (users[email]) {
-          return;
+        try {
+          await createUser();
+        } catch (error) {
+          console.error('Error:', error);
         }
 
-        users[email] = {
-          password,
-          stats: {wins: 0, losses: 0, gamesPlayed: 0}
 
-        };
+        // const users = JSON.parse(localStorage.getItem('hangleUsers')) || {};
+        // if (users[email]) {
+        //   return;
+        // }
 
-        localStorage.setItem('hangleUsers', JSON.stringify(users));
-        localStorage.setItem('hangleCurrentUser', email);
-        navigate('/play');
+        // users[email] = {
+        //   password,
+        //   stats: {wins: 0, losses: 0, gamesPlayed: 0}
+
+        // };
+
+        // localStorage.setItem('hangleUsers', JSON.stringify(users));
+        // localStorage.setItem('hangleCurrentUser', email);
+        // navigate('/play');
       };
+
+      async function createUser() {
+        await loginOrCreate(`/api/auth/create`);
+      }
+
+      async function loginOrCreate(endpoint) {
+        const response = await fetch(endpoint, {
+          method: 'POST',
+          body: JSON.stringify({email, password}),
+          headers: {
+            'Content-Type': 'application/json; charset=UTF-8',
+          },
+        });
+
+        if (response.status === 200) {
+          localStorage.setItem('hangleCurrentUser', email);
+          navigate('/play');
+        }
+        else {
+          const body = await response.json();
+          alert(`⚠ Error: ${body.msg}`);
+        }
+      }
 
 
   return (

@@ -4,6 +4,8 @@ const bcrypt = require('bcryptjs');
 const uuid = require('uuid');
 const app = express();
 
+const authCookieName = 'token';
+
 //data structures
 let users = [];
 let stats = [];
@@ -19,10 +21,53 @@ app.use(express.static('public'));
 let apiRouter = express.Router();
 app.use('/api', apiRouter);
 
-
-app.get('*', (_req, res) => {
-    res.send({ msg: 'Startup service' });
+//create new user
+apiRouter.post('/auth/create', async (req, res) => {
+    if (await findUser('email', req.body.email)) {
+      res.status(409).send({ msg: 'Existing user' });
+    } else {
+      const user = await createUser(req.body.email, req.body.password);
+  
+      setAuthCookie(res, user.token);
+      res.send({ email: user.email });
+    }
   });
+
+
+
+
+async function createUser(email, password) {
+    const passwordHash = await bcrypt.hash(password, 10);
+
+    const user = {
+        email: email,
+        password: passwordHash,
+        token: uuid.v4(),
+    };
+    users.push(user);
+
+    return user;
+}
+
+async function findUser(field, value) {
+    if (!value) return null;
+
+    return users.find((u) => u[field] === value);
+}
+
+// setAuthCookie in the HTTP response
+function setAuthCookie(res, authToken) {
+    res.cookie(authCookieName, authToken, {
+      secure: true,
+      httpOnly: true,
+      sameSite: 'strict',
+    });
+  }
+
+
+// app.get('*', (_req, res) => {
+//     res.send({ msg: 'Startup service' });
+//   });
   
   app.listen(port, () => {
     console.log(`Listening on port ${port}`);
