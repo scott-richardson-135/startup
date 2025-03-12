@@ -8,18 +8,24 @@ export function Login() {
     const [password, setPassword] = useState('');
 
     
-    const handleLoginClick = () => {
-      const users = JSON.parse(localStorage.getItem('hangleUsers')) || {};
-      
-      if (users[email] && users[email].password === password) {
-        localStorage.setItem('hangleCurrentUser', email); 
-        navigate('/play');
+    const handleLoginClick = async () => {
+      if (!email || !password) {
+        alert("Enter a username and password");
+        return;
+      }
+
+      try {
+        await loginUser();
+      } catch (error) {
+        alert("Invalid credentials");
+        console.error("Error: ", error)
       }
         
       };
     
       const handleCreateClick = async () => {
         if (!email || !password) {
+          alert("Enter a username and password");
           return;
         }
 
@@ -28,26 +34,14 @@ export function Login() {
         } catch (error) {
           console.error('Error:', error);
         }
-
-
-        // const users = JSON.parse(localStorage.getItem('hangleUsers')) || {};
-        // if (users[email]) {
-        //   return;
-        // }
-
-        // users[email] = {
-        //   password,
-        //   stats: {wins: 0, losses: 0, gamesPlayed: 0}
-
-        // };
-
-        // localStorage.setItem('hangleUsers', JSON.stringify(users));
-        // localStorage.setItem('hangleCurrentUser', email);
-        // navigate('/play');
       };
 
       async function createUser() {
         await loginOrCreate(`/api/auth/create`);
+      }
+
+      async function loginUser() {
+        await loginOrCreate('/api/auth/login')
       }
 
       async function loginOrCreate(endpoint) {
