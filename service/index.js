@@ -14,6 +14,8 @@ const port = process.argv.length > 2 ? process.argv[2] : 4000;
 
 app.use(express.json());
 
+app.use(cookieParser());
+
 app.use(express.static('public'));
 
 
@@ -43,7 +45,7 @@ apiRouter.post('/auth/login', async (req, res) => {
             res.send({email: user.email});
             return;
         }
-        res.status(401).send({msg: 'Unaothorized'});
+        res.status(401).send({msg: 'Unauthorized'});
     }
 });
 
@@ -68,6 +70,11 @@ const verifyAuth = async (req, res, next) => {
   };
 
 
+
+// GetScores
+apiRouter.get('/stats', verifyAuth, (_req, res) => {
+    res.send(stats);
+  });
 
 
 

@@ -15,7 +15,9 @@ export function Login() {
       }
 
       try {
+        console.log("Attempting login...");
         await loginUser();
+        console.log("Login process completed.");
       } catch (error) {
         alert("Invalid credentials");
         console.error("Error: ", error)
