@@ -45,8 +45,9 @@ apiRouter.post('/auth/login', async (req, res) => {
             res.send({email: user.email});
             return;
         }
-        res.status(401).send({msg: 'Unauthorized'});
+        return res.status(401).send({msg: 'Unauthorized'});
     }
+    return res.status(401).send({msg: "User not found"});
 });
 
 //logout
