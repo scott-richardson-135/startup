@@ -75,25 +75,38 @@ export function Play() {
         }
     }, [remainingGuesses]);
 
-    const endGame = (result) => {
+    const endGame = async (result) => {
         setGameOver(true);
         setGameResult(result);
 
-        //update stats here, local storage for now
-        const users = JSON.parse(localStorage.getItem("hangleUsers")) || {};
         const currentUser = localStorage.getItem("hangleCurrentUser");
 
-        if (currentUser && users[currentUser]) {
-            users[currentUser].stats.gamesPlayed += 1;
-            if (result === "win") {
-                users[currentUser].stats.wins +=1;
-            }
-            else {
-                users[currentUser].stats.losses +=1;
-            }
-        }
+        if (!currentUser) return;
 
-        localStorage.setItem("hangleUsers", JSON.stringify(users));
+        const updatedStats = {
+            gamesPlayed: 1,
+            wins: result === "win" ? 1 : 0,
+            losses: result === "loss" ? 1 : 0
+        };
+
+        // Send stats update to the backend
+        try {
+            const response = await fetch('/api/stat', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${localStorage.getItem('authToken')}`,
+                },
+                body: JSON.stringify(updatedStats)
+            });
+
+            if (!response.ok) {
+                const error = await response.json();
+                console.error('Failed to update stats:', error);
+            }
+        } catch (error) {
+            console.error('Error updating stats:', error);
+        }
     }
 
     const resetGame = () => {

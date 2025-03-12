@@ -72,12 +72,43 @@ const verifyAuth = async (req, res, next) => {
 
 
 
-// GetScores
+// Get Stats
 apiRouter.get('/stats', verifyAuth, (_req, res) => {
     res.send(stats);
   });
 
+//Submit stats
+apiRouter.post('/stat', verifyAuth, (req, res) => {
+  const userEmail = req.user.email;
+  const updatedStats = updateStats(req.body, userEmail);
 
+  if (updatedStats.error) {
+    return res.status(404).send(updatedStats);
+  }
+
+  res.send(updatedStats);
+});
+
+
+function updateStats(newStat, userEmail) {
+  const user = users.find(u => u.email === userEmail);
+
+  if (!user) {
+    return {msg: "User not found"};
+  }
+
+  if (!user.stats) {
+    user.stats = { gamesPlayed: 0, wins: 0, losses: 0 };
+  }
+
+  user.stats.gamesPlayed += newStat.gamesPlayed ?? 0;
+  user.stats.wins += newStat.wins ?? 0;
+  user.stats.losses += newStat.losses ?? 0;
+
+  return user.stats;
+
+
+}
 
 async function createUser(email, password) {
     const passwordHash = await bcrypt.hash(password, 10);
