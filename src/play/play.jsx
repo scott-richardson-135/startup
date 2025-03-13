@@ -138,16 +138,29 @@ export function Play() {
         }
     }
 
-    const resetGame = () => {
+    const resetGame = async () => {
         setGuessedLetters([]);
         setIncorrectGuesses([]);
         setRemainingGuesses(6);
         setGameOver(false);
         setGameResult(null);
 
-        const randomWord = "DIFFERENT"; //another api call here
-        setWord(randomWord);
-        setDisplayWord("_ ".repeat(randomWord.length).trim());
+        //another api call
+        try {
+            const response = await fetch('https://random-word-api.herokuapp.com/word');
+            if (!response.ok) {
+                throw new error("Failed to fetch word");
+            }
+
+            const data = await response.json();
+            const randomWord = data[0]; 
+            console.log(randomWord); //for debugging, probably get rid of this
+            setWord(randomWord.toUpperCase());
+            setDisplayWord("_ ".repeat(randomWord.length).trim())
+        } catch (err) {
+            console.error("Error fetching random word:", err);
+        }
+
     };
 
   return (
