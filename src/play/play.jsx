@@ -20,10 +20,11 @@ export function Play() {
 
     //Get word, will be an api call eventually
     useEffect(() => {
+        const backupWords = ["APPLE", "BANANA", "ORANGE", "GRAPE", "MANGO"];
         //third party api call
         const fetchRandomWord = async () => {
             try {
-                const response = await fetch('https://random-word-api.herokuapp.com/word');
+                const response = await fetch('https://random-word-api.vercel.app/api?words=1');
                 if (!response.ok) {
                     throw new error("Failed to fetch word");
                 }
@@ -35,6 +36,9 @@ export function Play() {
                 setDisplayWord("_ ".repeat(randomWord.length).trim())
             } catch (err) {
                 console.error("Error fetching random word:", err);
+                const fallbackWord = backupWords[Math.floor(Math.random() * backupWords.length)];
+                setWord(fallbackWord);
+                setDisplayWord("_ ".repeat(fallbackWord.length).trim());
             }
         };
 
@@ -147,7 +151,7 @@ export function Play() {
 
         //another api call
         try {
-            const response = await fetch('https://random-word-api.herokuapp.com/word');
+            const response = await fetch('https://random-word-api.vercel.app/api?words=1');
             if (!response.ok) {
                 throw new error("Failed to fetch word");
             }
