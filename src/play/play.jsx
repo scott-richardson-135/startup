@@ -20,9 +20,25 @@ export function Play() {
 
     //Get word, will be an api call eventually
     useEffect(() => {
-        const randomWord = "PLACEHOLDER"; //this is where the API call needs to put the word
-        setWord(randomWord);
-        setDisplayWord("_ ".repeat(randomWord.length).trim())
+        //third party api call
+        const fetchRandomWord = async () => {
+            try {
+                const response = await fetch('https://random-word-api.herokuapp.com/word');
+                if (!response.ok) {
+                    throw new error("Failed to fetch word");
+                }
+
+                const data = await response.json();
+                const randomWord = data[0]; 
+                console.log(randomWord); //for debugging, probably get rid of this
+                setWord(randomWord.toUpperCase());
+                setDisplayWord("_ ".repeat(randomWord.length).trim())
+            } catch (err) {
+                console.error("Error fetching random word:", err);
+            }
+        };
+
+        fetchRandomWord();
     }, [])
 
     //Mock Notifications
@@ -45,6 +61,8 @@ export function Play() {
 
     //logic for guessed letter
     const handleGuess = (letter) => {
+        if (!word) return;
+
         letter = letter.toUpperCase();
 
         if (!letter.match(/[A-Z]/) || guessedLetters.includes(letter)) return;
