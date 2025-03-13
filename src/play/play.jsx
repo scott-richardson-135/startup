@@ -95,15 +95,26 @@ export function Play() {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${localStorage.getItem('authToken')}`,
                 },
+                credentials: "include",
                 body: JSON.stringify(updatedStats)
             });
+
+            const text = await response.text(); // Read as text instead of assuming JSON
+            console.log("Raw Response from /stat:", text);
 
             if (!response.ok) {
                 const error = await response.json();
                 console.error('Failed to update stats:', error);
+            } else {
+                console.log("Updated stats:", text); // Log raw response
             }
+
+            //get immediately after (debugging)
+            const statsResponse = await fetch('/api/stats', { credentials: "include" });
+            const statsText = await statsResponse.text();
+            console.log("Fetched stats after update:", statsText);
+
         } catch (error) {
             console.error('Error updating stats:', error);
         }

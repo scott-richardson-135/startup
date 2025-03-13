@@ -79,33 +79,47 @@ apiRouter.get('/stats', verifyAuth, (_req, res) => {
 
 //Submit stats
 apiRouter.post('/stat', verifyAuth, (req, res) => {
-  const userEmail = req.user.email;
-  const updatedStats = updateStats(req.body, userEmail);
+  const user = users.find(u => u.token === req.cookies[authCookieName]);
+
+  if (!user) {
+    return res.status(401).send({msg: "Unauthorized"});
+  }
+
+  console.log("Received stats for user:", user.email);
+
+  const updatedStats = updateStats(req.body, user.email);
+
 
   if (updatedStats.error) {
     return res.status(404).send(updatedStats);
   }
 
-  res.send(updatedStats);
+  console.log("Updated stats:", updatedStats);
+
+  res.json(updatedStats);
+
 });
 
 
 function updateStats(newStat, userEmail) {
-  const user = users.find(u => u.email === userEmail);
+  //check if user stats already exist in array
+let userStats = stats.find(s => s.email === userEmail);
 
-  if (!user) {
-    return {msg: "User not found"};
+  if (!userStats) {
+    // If stats don't exist for this user, create them
+    userStats = { email: userEmail, gamesPlayed: 0, wins: 0, losses: 0 };
+    stats.push(userStats);  // Add the new user stats to the stats array
+    console.log(`Created new stats for ${userEmail}:`, userStats);  // Log creation of new stats
   }
 
-  if (!user.stats) {
-    user.stats = { gamesPlayed: 0, wins: 0, losses: 0 };
-  }
+  // Update the stats
+  userStats.gamesPlayed = (userStats.gamesPlayed || 0) + (newStat.gamesPlayed || 0);
+  userStats.wins = (userStats.wins || 0) + (newStat.wins || 0);
+  userStats.losses = (userStats.losses || 0) + (newStat.losses || 0);
 
-  user.stats.gamesPlayed += newStat.gamesPlayed ?? 0;
-  user.stats.wins += newStat.wins ?? 0;
-  user.stats.losses += newStat.losses ?? 0;
+  console.log(`Updated stats for ${userEmail}:`, userStats);  // Log updated stats
 
-  return user.stats;
+  return userStats;
 
 
 }
