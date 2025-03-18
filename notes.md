@@ -422,5 +422,29 @@ npm install express cookie-parser uuid
 
 
 
+## Testing
+Super important stuff for writing good code, focus up brother
+Minimize manual toil
+Just as important as the actual application tool
+
+Endpoint testing - Jest
+Most popular for testing backend
+
+Benefits
+-Regression
+-Write better code
+-Think like a user
+-Helps debug
+
+
+Good tests
+-independent of each other
+
+ UI testing - Playwright
+
+ 
+
+
+
 
  
