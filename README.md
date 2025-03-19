@@ -121,11 +121,11 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-- [ ] **User registration** - I did not complete this part of the deliverable.
-- [ ] **User login and logout** - I did not complete this part of the deliverable.
-- [ ] **Stores data in MongoDB** - I did not complete this part of the deliverable.
-- [ ] **Stores credentials in MongoDB** - I did not complete this part of the deliverable.
-- [ ] **Restricts functionality based on authentication** - I did not complete this part of the deliverable.
+- [X] **User registration** - Users can create "accounts" that are stored in Mongo DB "user" collection.
+- [X] **User login and logout** - Changed my login and logout endpoints to check and update the user collection in Mongo instead of server memory.
+- [X] **Stores data in MongoDB** - I created a Mongo DB account and can connect to it when using my service endpoints.
+- [X] **Stores credentials in MongoDB** - The "user" collection stores emails, hashed passwords, and token values and can lookup based on email or token.
+- [X] **Restricts functionality based on authentication** - Restricted endpoints use verifyAuth function.
 
 ## 🚀 WebSocket deliverable
 
