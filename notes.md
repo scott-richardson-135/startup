@@ -420,6 +420,18 @@ HttpOnly- !JavaScript
 SameSite = Strict- only given back to origin
 npm install express cookie-parser uuid
 
+## Databas
+
+Using mongo db atlas
+Lots of different options, this one stores in a pretty easy way so we'll use it
+
+data arranged in collections, use one for simon and one for startup
+
+add dbconfig file so I can access with my credentials
+
+data persists even if server shuts down, good stuff
+
+not a whole lot else
 
 
 ## Testing
