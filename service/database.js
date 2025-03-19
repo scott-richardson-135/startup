@@ -22,23 +22,41 @@ const statCollection = db.collection("stat");
 
 
 function getUser(email) {
-return userCollection.findOne({ email: email });
+    return userCollection.findOne({ email: email });
 }
 
 function getUserByToken(token) {
-return userCollection.findOne({ token: token });
+    return userCollection.findOne({ token: token });
 }
 
 async function addUser(user) {
-await userCollection.insertOne(user);
+    await userCollection.insertOne(user);
 }
 
 async function updateUser(user) {
-await userCollection.updateOne({ email: user.email }, { $set: user });
+    await userCollection.updateOne({ email: user.email }, { $set: user });
 }
 
 async function addScore(score) {
-return scoreCollection.insertOne(score);
+    return scoreCollection.insertOne(score);
+}
+
+function getStats(email) {
+    return statCollection.findOne({email: email}) || { email, gamesPlayed: 0, wins: 0, losses: 0 };
+}
+
+async function updateStats(email, newStats) {
+    return statCollection.updateOne(
+        {email: email},
+        {
+            $inc: {
+                gamesPlayed: newStats.gamesPlayed || 0,
+                wins: newStats.wins || 0,
+                losses: newStats.losses || 0
+            }
+        },
+        {upsert: true}
+    );
 }
 
 module.exports = {
@@ -47,4 +65,6 @@ module.exports = {
     addUser,
     updateUser,
     addScore,
+    getStats,
+    updateStats
 }; 

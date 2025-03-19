@@ -25,11 +25,10 @@ export function Stats() {
 
                 const data = await response.json();
                 console.log("Fetched stats:", data);
-                const userStats = data.find((stat) => stat.email === hangleCurrentUser);
-                if (userStats) {
-                    setStats(userStats); // Update stats with the data for the current user
+                if (data && data.email === hangleCurrentUser) {
+                    setStats(data); // Update stats with the data for the current user
                 } else {
-                    throw new Error('No stats found for the current user');
+                    setStats({ gamesPlayed: 0, wins: 0, losses: 0 });
                 }
             }
             catch (err) {

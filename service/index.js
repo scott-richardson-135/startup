@@ -76,13 +76,21 @@ const verifyAuth = async (req, res, next) => {
 
 
 // Get Stats
-apiRouter.get('/stats', verifyAuth, (_req, res) => {
-    res.send(stats);
+apiRouter.get('/stats', verifyAuth, async (req, res) => {
+    const user = await DB.getUserByToken(req.cookies[authCookieName]);
+
+    if (!user) {
+      return res.status(401).send({ msg: "Unauthorized" });
+    }
+
+    const stats = await DB.getStats(user.email)
+    res.json(stats);
   });
 
+
 //Submit stats
-apiRouter.post('/stat', verifyAuth, (req, res) => {
-  const user = users.find(u => u.token === req.cookies[authCookieName]);
+apiRouter.post('/stat', verifyAuth, async (req, res) => {
+  const user = await DB.getUserByToken(req.cookies[authCookieName]);
 
   if (!user) {
     return res.status(401).send({msg: "Unauthorized"});
@@ -90,12 +98,9 @@ apiRouter.post('/stat', verifyAuth, (req, res) => {
 
   console.log("Received stats for user:", user.email);
 
-  const updatedStats = updateStats(req.body, user.email);
+  await DB.updateStats(user.email, req.body)
+  const updatedStats = await DB.getStats(user.email);
 
-
-  if (updatedStats.error) {
-    return res.status(404).send(updatedStats);
-  }
 
   console.log("Updated stats:", updatedStats);
 
@@ -104,28 +109,6 @@ apiRouter.post('/stat', verifyAuth, (req, res) => {
 });
 
 
-function updateStats(newStat, userEmail) {
-  //check if user stats already exist in array
-let userStats = stats.find(s => s.email === userEmail);
-
-  if (!userStats) {
-    // If stats don't exist for this user, create them
-    userStats = { email: userEmail, gamesPlayed: 0, wins: 0, losses: 0 };
-    stats.push(userStats);  // Add the new user stats to the stats array
-    console.log(`Created new stats for ${userEmail}:`, userStats);  // Log creation of new stats
-  }
-
-  // Update the stats
-  userStats.gamesPlayed = (userStats.gamesPlayed || 0) + (newStat.gamesPlayed || 0);
-  userStats.wins = (userStats.wins || 0) + (newStat.wins || 0);
-  userStats.losses = (userStats.losses || 0) + (newStat.losses || 0);
-
-  console.log(`Updated stats for ${userEmail}:`, userStats);  // Log updated stats
-
-  return userStats;
-
-
-}
 
 async function createUser(email, password) {
     const passwordHash = await bcrypt.hash(password, 10);
