@@ -455,6 +455,14 @@ Good tests
  UI testing - Playwright
 
  
+## Websocket
+HTTP - Great for client initiated request, doesn't allow for bidirectional messages
+
+Websocket is an upgrade of HTTP
+Either side can send data at any time
+Efficient
+Widespread support
+
 
 
 
