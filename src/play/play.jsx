@@ -15,15 +15,32 @@ export function Play() {
     const [guess, setGuess] = useState("");
     const [gameOver, setGameOver] = useState(false);
     const [gameResult, setGameResult] = useState(null);
-    const userName = localStorage.getItem('hangleCurrentUser');
+    const [userName, setUserName] = useState('');
      
+    // Fetch the userName from backend (via API call)
+    useEffect(() => {
+        const fetchUserName = async () => {
+            try {
+                const response = await fetch('/api/stats', { credentials: 'include' });
+                if (!response.ok) {
+                    throw new Error('User not logged in');
+                }
 
+                const data = await response.json();
+                setUserName(data.email);  // Assuming `data.email` is the user's email or username
+            } catch (err) {
+                console.error('Error fetching username:', err);
+            }
+        };
 
-    //Get word, will be an api call eventually
+        fetchUserName();
+    }, []);
+
+    //Get word
     useEffect(() => {
         const backupWords = ["APPLE", "BANANA", "ORANGE", "GRAPE", "MANGO"];
         //third party api call
-        GameNotifier.broadcastEvent(userName, GameEvent.Start, { msg: `${userName} started a game` });
+        //GameNotifier.broadcastEvent(userName, GameEvent.Start, { msg: `${userName} started a game` });
         const fetchRandomWord = async () => {
             try {
                 const response = await fetch('https://random-word-api.vercel.app/api?words=1');
@@ -47,24 +64,31 @@ export function Play() {
         fetchRandomWord();
     }, [])
 
-    //Mock Notifications
-    useEffect(()=> {
+    //Notifications
+    useEffect(() => {
         const handler = (event) => {
-            //show events from other users
+            // Show events from other users
             if (event.type === GameEvent.Start || event.type === GameEvent.End) {
                 if (event.from !== userName) {
-                    setNotifications((prev) => [...prev.slice(-2), `${event.from} ${event.type === GameEvent.Start ? "started a game" : "finished a game"}`]);
+                    setNotifications((prev) => {
+                        const newNotifications = [...prev, `${event.from} ${event.type === GameEvent.Start ? "started a game" : "finished a game"}`];
+                        // Limit to 4 most recent messages
+                        return newNotifications.slice(-4);  // Keep only the last 4 messages
+                    });
+                    console.log("Received message");
                 }
             }
         };
-
+    
+        // Add handler on mount
         GameNotifier.addHandler(handler);
-
+    
+        // Cleanup handler on unmount or userName change
         return () => {
             GameNotifier.removeHandler(handler);
         };
-
-    }, [userName])
+    
+    }, []);
 
     //logic for guessed letter
     const handleGuess = (letter) => {
@@ -104,6 +128,7 @@ export function Play() {
         setGameOver(true);
         setGameResult(result);
 
+        console.log("broadcasting event")
         GameNotifier.broadcastEvent(userName, GameEvent.End, { msg: `${userName} ${result === "win" ? "won" : "lost"} the game` });
         const currentUser = localStorage.getItem("hangleCurrentUser");
 
