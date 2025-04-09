@@ -464,7 +464,7 @@ Efficient
 Widespread support
 
 
-
+I wasn't sure how exactly some of the stuff worked with simon, where exactly is the privilege "escalated?" 
 
 
  
