@@ -1,5 +1,6 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
+import { GameEvent, GameNotifier } from './gameNotifier'
 import './play.css';
 
 export function Play() {
@@ -22,11 +23,12 @@ export function Play() {
     useEffect(() => {
         const backupWords = ["APPLE", "BANANA", "ORANGE", "GRAPE", "MANGO"];
         //third party api call
+        GameNotifier.broadcastEvent(userName, GameEvent.Start, { msg: `${userName} started a game` });
         const fetchRandomWord = async () => {
             try {
                 const response = await fetch('https://random-word-api.vercel.app/api?words=1');
                 if (!response.ok) {
-                    throw new error("Failed to fetch word");
+                    throw new Error("Failed to fetch word");
                 }
 
                 const data = await response.json();
@@ -47,21 +49,22 @@ export function Play() {
 
     //Mock Notifications
     useEffect(()=> {
-        const messages = [
-            "Player 1 Lost",
-            "Player 2 Won",
-            "Player 2 started a game",
-            "Player 3 said hi"
-        ];
+        const handler = (event) => {
+            //show events from other users
+            if (event.type === GameEvent.Start || event.type === GameEvent.End) {
+                if (event.from !== userName) {
+                    setNotifications((prev) => [...prev.slice(-2), `${event.from} ${event.type === GameEvent.Start ? "started a game" : "finished a game"}`]);
+                }
+            }
+        };
 
+        GameNotifier.addHandler(handler);
 
-        const interval = setInterval(() => {
-            const randomMessage = messages[Math.floor(Math.random() * messages.length)];
-            setNotifications((prev) => [...prev.slice(-2), randomMessage])
-        }, 5000)
+        return () => {
+            GameNotifier.removeHandler(handler);
+        };
 
-        return () => clearInterval(interval);
-    }, [])
+    }, [userName])
 
     //logic for guessed letter
     const handleGuess = (letter) => {
@@ -101,6 +104,7 @@ export function Play() {
         setGameOver(true);
         setGameResult(result);
 
+        GameNotifier.broadcastEvent(userName, GameEvent.End, { msg: `${userName} ${result === "win" ? "won" : "lost"} the game` });
         const currentUser = localStorage.getItem("hangleCurrentUser");
 
         if (!currentUser) return;
@@ -156,6 +160,7 @@ export function Play() {
                 throw new error("Failed to fetch word");
             }
 
+            GameNotifier.broadcastEvent(userName, GameEvent.Start, { msg: `${userName} started a game` });
             const data = await response.json();
             const randomWord = data[0]; 
             console.log(randomWord); //for debugging, probably get rid of this
